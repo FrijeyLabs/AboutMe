@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Curriculum Vitae - Jeffry Marte Bonifacio, Full Stack Software Engineer.">
+    <title>CV - Jeffry Marte Bonifacio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --page-bg: #e9eaee;
+            --paper-bg: #ffffff;
+            --ink: #1f2937;
+            --ink-soft: #4b5563;
+            --ink-muted: #6b7280;
+            --accent: #047857;
+            --accent-soft: #ecfdf5;
+            --rule: #e5e7eb;
+            --toolbar-bg: #0a0a0c;
+            --toolbar-accent: #00ff6a;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--page-bg);
+            color: var(--ink);
+            line-height: 1.5;
+            padding: 40px 20px 80px;
+        }
+
+        /* Top toolbar */
+        .toolbar {
+            position: sticky;
+            top: 20px;
+            z-index: 10;
+            max-width: 8.5in;
+            margin: 0 auto 24px;
+            background: var(--toolbar-bg);
+            border-radius: 14px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            color: #fff;
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .toolbar a.back-link {
+            color: #9ca3af;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s ease;
+        }
+
+        .toolbar a.back-link:hover {
+            color: var(--toolbar-accent);
+        }
+
+        .toolbar-right {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-toolbar {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-toolbar:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-toolbar.primary {
+            background: linear-gradient(135deg, #00ff6a 0%, #00dd5e 100%);
+            color: #0a0a0c;
+            border-color: transparent;
+        }
+
+        .btn-toolbar.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 255, 106, 0.25);
+        }
+
+        .btn-toolbar svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Letter-sized paper */
+        .paper {
+            width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto;
+            background: var(--paper-bg);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            padding: 0.55in 0.65in;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #047857 0%, #10b981 50%, #34d399 100%);
+        }
+
+        /* Header */
+        .cv-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: flex-end;
+            padding-bottom: 18px;
+            border-bottom: 2px solid var(--rule);
+            margin-bottom: 22px;
+        }
+
+        .cv-name {
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .cv-role {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-top: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        .cv-contact {
+            font-size: 0.82rem;
+            color: var(--ink-soft);
+            text-align: right;
+            line-height: 1.8;
+        }
+
+        .cv-contact a {
+            color: var(--ink-soft);
+            text-decoration: none;
+        }
+
+        .cv-contact a:hover {
+            color: var(--accent);
+        }
+
+        .cv-contact div {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 6px;
+        }
+
+        .cv-contact svg {
+            width: 12px;
+            height: 12px;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        /* Sections */
+        .cv-section {
+            margin-bottom: 18px;
+        }
+
+        .cv-section h2 {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .cv-section p {
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+            line-height: 1.6;
+        }
+
+        .cv-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* Personal details grid */
+        .personal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 24px;
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+
+        .personal-grid .label {
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        /* Timeline item */
+        .item {
+            margin-bottom: 12px;
+        }
+
+        .item-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 3px;
+        }
+
+        .item-title {
+            font-weight: 700;
+            color: var(--ink);
+            font-size: 0.95rem;
+        }
+
+        .item-subtitle {
+            color: var(--ink-soft);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .item-date {
+            font-size: 0.78rem;
+            color: var(--ink-muted);
+            font-weight: 600;
+            white-space: nowrap;
+            padding: 2px 10px;
+            background: var(--accent-soft);
+            border-radius: 10px;
+            color: var(--accent);
+        }
+
+        .item-body {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+            margin-top: 3px;
+        }
+
+        .item-body ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 4px;
+        }
+
+        .item-body li {
+            position: relative;
+            padding-left: 14px;
+            margin-bottom: 3px;
+            line-height: 1.5;
+        }
+
+        .item-body li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Skills */
+        .skills-cv {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 24px;
+        }
+
+        .skill-row {
+            font-size: 0.85rem;
+            color: var(--ink-soft);
+        }
+
+        .skill-row strong {
+            color: var(--ink);
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.85rem;
+        }
+
+        /* Languages */
+        .languages {
+            display: flex;
+            gap: 24px;
+            font-size: 0.88rem;
+            color: var(--ink-soft);
+        }
+
+        .languages strong {
+            color: var(--ink);
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid var(--rule);
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Print rules — keep paper fitting Letter */
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .toolbar { display: none; }
+            .paper {
+                box-shadow: none;
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+            }
+        }
+
+        @media (max-width: 900px) {
+            body { padding: 20px 10px 60px; }
+            .paper {
+                width: 100%;
+                min-height: 0;
+                padding: 32px 24px;
+            }
+            .cv-header {
+                grid-template-columns: 1fr;
+                align-items: flex-start;
+            }
+            .cv-contact {
+                text-align: left;
+            }
+            .cv-contact div {
+                justify-content: flex-start;
+            }
+            .cv-two-col, .personal-grid, .skills-cv {
+                grid-template-columns: 1fr;
+            }
+            .toolbar {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            .toolbar-right {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar" id="toolbar">
+        <div class="toolbar-left">
+            <a href="index.html" class="back-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span data-en="Back" data-es="Volver">Back</span>
+            </a>
+            <span data-en="Curriculum Vitae" data-es="Currículum Vitae">Curriculum Vitae</span>
+        </div>
+        <div class="toolbar-right">
+            <button class="btn-toolbar" id="langBtn" onclick="toggleLanguage()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                <span id="langLabel">ES</span>
+            </button>
+            <button class="btn-toolbar primary" onclick="downloadPDF()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span data-en="Download PDF" data-es="Descargar PDF">Download PDF</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="paper" id="cvPaper">
+        <header class="cv-header">
+            <div>
+                <div class="cv-name">Jeffry Marte Bonifacio</div>
+                <div class="cv-role" data-en="Full Stack Software Engineer" data-es="Ingeniero de Software Full Stack">Full Stack Software Engineer</div>
+            </div>
+            <div class="cv-contact">
+                <div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <a href="mailto:jeffry.m.bonifacio@gmail.com">jeffry.m.bonifacio@gmail.com</a>
+                </div>
+                <div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <a href="https://wa.me/18099525334" target="_blank" rel="noopener">+1 (809) 952-5334</a>
+                </div>
+                <div>
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <a href="https://github.com/FrijeyLabs" target="_blank" rel="noopener">github.com/FrijeyLabs</a>
+                </div>
+                <div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span data-en="Santo Domingo, Dominican Republic" data-es="Santo Domingo, República Dominicana">Santo Domingo, Dominican Republic</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="cv-section">
+            <h2 data-en="Professional Summary" data-es="Resumen Profesional">Professional Summary</h2>
+            <p data-en="Full Stack Software Engineer with 7+ years of hands-on experience designing and delivering web, mobile, and desktop applications. Skilled in C#, .NET, ASP.NET, Node.js, React, and Next.js. Passionate about complex, non-conventional products and adopting AI-powered workflows — notably Claude Code — to ship higher-quality software, faster." data-es="Ingeniero de Software Full Stack con más de 7 años de experiencia diseñando y entregando aplicaciones web, móviles y de escritorio. Dominio de C#, .NET, ASP.NET, Node.js, React y Next.js. Apasionado por productos complejos y no convencionales, y por la adopción de flujos de trabajo impulsados por IA — en particular Claude Code — para entregar software de mayor calidad en menos tiempo.">Full Stack Software Engineer with 7+ years of hands-on experience designing and delivering web, mobile, and desktop applications. Skilled in C#, .NET, ASP.NET, Node.js, React, and Next.js. Passionate about complex, non-conventional products and adopting AI-powered workflows — notably Claude Code — to ship higher-quality software, faster.</p>
+        </section>
+
+        <section class="cv-section">
+            <h2 data-en="Personal Details" data-es="Datos Personales">Personal Details</h2>
+            <div class="personal-grid">
+                <div><span class="label" data-en="Nationality:" data-es="Nacionalidad:">Nationality:</span> <span data-en="Dominican" data-es="Dominicana">Dominican</span></div>
+                <div><span class="label" data-en="Location:" data-es="Ubicación:">Location:</span> <span data-en="Dominican Republic" data-es="República Dominicana">Dominican Republic</span></div>
+                <div><span class="label" data-en="Languages:" data-es="Idiomas:">Languages:</span> <span data-en="Spanish (native), English (professional)" data-es="Español (nativo), Inglés (profesional)">Spanish (native), English (professional)</span></div>
+                <div><span class="label" data-en="Availability:" data-es="Disponibilidad:">Availability:</span> <span data-en="Immediate" data-es="Inmediata">Immediate</span></div>
+            </div>
+        </section>
+
+        <section class="cv-section">
+            <h2 data-en="Education" data-es="Formación Académica">Education</h2>
+            <div class="item">
+                <div class="item-head">
+                    <div>
+                        <div class="item-title" data-en="Bachelor's Degree in Software Engineering" data-es="Licenciatura en Ingeniería de Software">Bachelor's Degree in Software Engineering</div>
+                        <div class="item-subtitle" data-en="UAPA — Universidad Abierta Para Adultos, Dominican Republic" data-es="UAPA — Universidad Abierta Para Adultos, República Dominicana">UAPA — Universidad Abierta Para Adultos, Dominican Republic</div>
+                    </div>
+                    <div class="item-date">2020</div>
+                </div>
+                <div class="item-body" data-en="Graduated in 2020 with a strong foundation in software architecture, algorithms, databases, and full-stack development." data-es="Graduado en 2020 con una sólida base en arquitectura de software, algoritmos, bases de datos y desarrollo full-stack.">
+                    Graduated in 2020 with a strong foundation in software architecture, algorithms, databases, and full-stack development.
+                </div>
+            </div>
+        </section>
+
+        <section class="cv-section">
+            <h2 data-en="Professional Experience" data-es="Experiencia Profesional">Professional Experience</h2>
+
+            <div class="item">
+                <div class="item-head">
+                    <div>
+                        <div class="item-title" data-en="Full Stack Software Engineer — FrijeyLabs" data-es="Ingeniero de Software Full Stack — FrijeyLabs">Full Stack Software Engineer — FrijeyLabs</div>
+                        <div class="item-subtitle" data-en="Independent / Founder" data-es="Independiente / Fundador">Independent / Founder</div>
+                    </div>
+                    <div class="item-date" data-en="2018 — Present" data-es="2018 — Actualidad">2018 — Present</div>
+                </div>
+                <div class="item-body">
+                    <ul>
+                        <li data-en="Designed and built MhMusik, a full music-distribution platform (web dashboard + mobile app) with analytics, earnings management, and integrations with Spotify and YouTube Music." data-es="Diseñé y desarrollé MhMusik, una plataforma completa de distribución musical (dashboard web + app móvil) con analítica, gestión de ingresos e integraciones con Spotify y YouTube Music.">Designed and built MhMusik, a full music-distribution platform (web dashboard + mobile app) with analytics, earnings management, and integrations with Spotify and YouTube Music.</li>
+                        <li data-en="Built JCM — an ASP.NET / C# / MySQL school-management system for grades and report cards, including teacher and parent portals." data-es="Construí JCM — un sistema de gestión escolar en ASP.NET / C# / MySQL para calificaciones y boletines, con portales para docentes y padres.">Built JCM — an ASP.NET / C# / MySQL school-management system for grades and report cards, including teacher and parent portals.</li>
+                        <li data-en="Shipped CashFlow (personal finance) and Kronos Bible (daily scripture + audio) mobile apps using Xamarin and XAML." data-es="Lancé las apps móviles CashFlow (finanzas personales) y Kronos Bible (lectura diaria + audio) utilizando Xamarin y XAML.">Shipped CashFlow (personal finance) and Kronos Bible (daily scripture + audio) mobile apps using Xamarin and XAML.</li>
+                        <li data-en="Adopted Claude Code as a core part of my modern workflow, pairing with AI to plan, implement, and review code across the full stack." data-es="Adopté Claude Code como parte central de mi flujo de trabajo moderno, programando junto a la IA para planear, implementar y revisar código en todo el stack.">Adopted Claude Code as a core part of my modern workflow, pairing with AI to plan, implement, and review code across the full stack.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-head">
+                    <div>
+                        <div class="item-title" data-en="Game Development — Personal Projects" data-es="Desarrollo de Videojuegos — Proyectos Personales">Game Development — Personal Projects</div>
+                        <div class="item-subtitle" data-en="Entry point into software development" data-es="Punto de entrada al desarrollo de software">Entry point into software development</div>
+                    </div>
+                    <div class="item-date">2018 — 2019</div>
+                </div>
+                <div class="item-body" data-en="Built arcade-style games with multiplayer features and scoring systems; the experience that sparked my transition into professional software development." data-es="Desarrollé videojuegos estilo arcade con modo multijugador y sistemas de puntaje; la experiencia que me llevó al desarrollo de software profesional.">
+                    Built arcade-style games with multiplayer features and scoring systems; the experience that sparked my transition into professional software development.
+                </div>
+            </div>
+        </section>
+
+        <section class="cv-section">
+            <h2 data-en="Technical Skills" data-es="Habilidades Técnicas">Technical Skills</h2>
+            <div class="skills-cv">
+                <div class="skill-row">
+                    <strong data-en="Backend" data-es="Backend">Backend</strong>
+                    C#, .NET Framework, ASP.NET, Node.js, Python, MySQL
+                </div>
+                <div class="skill-row">
+                    <strong data-en="Frontend" data-es="Frontend">Frontend</strong>
+                    JavaScript, React, Next.js, HTML5, CSS3, JSON
+                </div>
+                <div class="skill-row">
+                    <strong data-en="Mobile & Desktop" data-es="Móvil y Escritorio">Mobile &amp; Desktop</strong>
+                    Xamarin, XAML, Windows Forms
+                </div>
+                <div class="skill-row">
+                    <strong data-en="Tools & AI" data-es="Herramientas e IA">Tools &amp; AI</strong>
+                    Git, GitHub, Claude Code, AI-assisted development
+                </div>
+            </div>
+        </section>
+
+        <section class="cv-section">
+            <h2 data-en="Languages" data-es="Idiomas">Languages</h2>
+            <div class="languages">
+                <div><strong data-en="Spanish:" data-es="Español:">Spanish:</strong> <span data-en="Native" data-es="Nativo">Native</span></div>
+                <div><strong data-en="English:" data-es="Inglés:">English:</strong> <span data-en="Professional" data-es="Profesional">Professional</span></div>
+            </div>
+        </section>
+
+        <section class="cv-section">
+            <h2 data-en="References" data-es="Referencias">References</h2>
+            <p data-en="Available upon request." data-es="Disponibles a solicitud.">Available upon request.</p>
+        </section>
+
+        <div class="footer-note" data-en="Jeffry Marte Bonifacio — Full Stack Software Engineer · Dominican Republic" data-es="Jeffry Marte Bonifacio — Ingeniero de Software Full Stack · República Dominicana">
+            Jeffry Marte Bonifacio — Full Stack Software Engineer · Dominican Republic
+        </div>
+    </div>
+
+    <script>
+        const LANG_KEY = 'jmb-lang';
+
+        function applyLanguage(lang) {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const value = el.getAttribute('data-' + lang);
+                if (value == null) return;
+                if (value.indexOf('<') !== -1) {
+                    el.innerHTML = value;
+                } else {
+                    el.textContent = value;
+                }
+            });
+            document.documentElement.lang = lang === 'es' ? 'es' : 'en';
+            const label = document.getElementById('langLabel');
+            if (label) label.textContent = lang === 'es' ? 'EN' : 'ES';
+            try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        }
+
+        function toggleLanguage() {
+            const current = (localStorage.getItem(LANG_KEY) || 'en');
+            applyLanguage(current === 'en' ? 'es' : 'en');
+        }
+
+        (function initLanguage() {
+            let saved = 'en';
+            try { saved = localStorage.getItem(LANG_KEY) || 'en'; } catch (e) {}
+            if (saved === 'es') applyLanguage('es');
+            else {
+                const label = document.getElementById('langLabel');
+                if (label) label.textContent = 'ES';
+            }
+        })();
+
+        function downloadPDF() {
+            const element = document.getElementById('cvPaper');
+            const lang = (localStorage.getItem(LANG_KEY) || 'en');
+            const filename = lang === 'es'
+                ? 'CV-Jeffry-Marte-Bonifacio.pdf'
+                : 'CV-Jeffry-Marte-Bonifacio.pdf';
+
+            const opt = {
+                margin: 0,
+                filename: filename,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                pagebreak: { mode: ['css', 'legacy'] }
+            };
+
+            if (typeof html2pdf === 'undefined') {
+                window.print();
+                return;
+            }
+
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+</body>
+</html>
