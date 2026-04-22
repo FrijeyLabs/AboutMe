@@ -132,6 +132,33 @@
             width: 100%;
         }
 
+        /* Language Toggle */
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .lang-toggle:hover {
+            border-color: var(--border-hover);
+            color: var(--accent-primary);
+        }
+
+        .lang-toggle svg {
+            width: 16px;
+            height: 16px;
+        }
+
         /* Container */
         .container {
             max-width: 1400px;
@@ -647,6 +674,10 @@
             font-weight: 500;
         }
 
+        .about-cta {
+            margin-top: 32px;
+        }
+
         .about-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1090,11 +1121,17 @@
     <nav>
         <div class="logo">JMB</div>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" data-en="Home" data-es="Inicio">Home</a></li>
+            <li><a href="#about" data-en="About" data-es="Sobre Mí">About</a></li>
+            <li><a href="#skills" data-en="Skills" data-es="Habilidades">Skills</a></li>
+            <li><a href="#projects" data-en="Projects" data-es="Proyectos">Projects</a></li>
+            <li><a href="#contact" data-en="Contact" data-es="Contacto">Contact</a></li>
+            <li>
+                <button class="lang-toggle" id="langToggle" onclick="toggleLanguage()" aria-label="Toggle language">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    <span id="langLabel">ES</span>
+                </button>
+            </li>
         </ul>
         <button class="mobile-menu-btn" onclick="toggleMenu()">
             <span></span>
@@ -1108,18 +1145,18 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <div class="hero-badge">Available for opportunities</div>
-                    <h1>Hi, I'm <span>Jeffry Marte</span></h1>
-                    <p class="hero-description">
+                    <div class="hero-badge" data-en="Available for opportunities" data-es="Disponible para oportunidades">Available for opportunities</div>
+                    <h1><span data-en="Hi, I'm" data-es="Hola, soy">Hi, I'm</span> <span>Jeffry Marte</span></h1>
+                    <p class="hero-description" data-en="A passionate Full Stack Software Engineer building innovative solutions through code. Specialized in web development, mobile apps, and desktop applications." data-es="Un apasionado Ingeniero de Software Full Stack construyendo soluciones innovadoras a través del código. Especializado en desarrollo web, aplicaciones móviles y aplicaciones de escritorio.">
                         A passionate Full Stack Software Engineer building innovative solutions through code.
                         Specialized in web development, mobile apps, and desktop applications.
                     </p>
                     <div class="hero-buttons">
                         <a href="#projects" class="btn btn-primary">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                            View Projects
+                            <span data-en="View Projects" data-es="Ver Proyectos">View Projects</span>
                         </a>
-                        <a href="#contact" class="btn btn-secondary">
+                        <a href="#contact" class="btn btn-secondary" data-en="Get in Touch" data-es="Contáctame">
                             Get in Touch
                         </a>
                     </div>
@@ -1130,64 +1167,78 @@
                         <div class="floating-card card-1">
                             <div class="floating-card-icon">7+</div>
                             <div class="floating-card-text">
-                                <strong>Years Experience</strong>
-                                <span>Since 2018</span>
+                                <strong data-en="Years Experience" data-es="Años de Experiencia">Years Experience</strong>
+                                <span data-en="Since 2018" data-es="Desde 2018">Since 2018</span>
                             </div>
                         </div>
                         <div class="floating-card card-2">
                             <div class="floating-card-icon">5+</div>
                             <div class="floating-card-text">
-                                <strong>Live Projects</strong>
-                                <span>Web & Mobile</span>
+                                <strong data-en="Live Projects" data-es="Proyectos Activos">Live Projects</strong>
+                                <span data-en="Web & Mobile" data-es="Web y Móvil">Web & Mobile</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">Scroll</div>
+        <div class="scroll-indicator" data-en="Scroll" data-es="Desplazar">Scroll</div>
     </section>
 
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">About Me</span>
-                <h2 class="section-title">My Journey in <span>Tech</span></h2>
-                <p class="section-subtitle">Turning ideas into reality through code</p>
+                <span class="section-label" data-en="About Me" data-es="Sobre Mí">About Me</span>
+                <h2 class="section-title"><span data-en="My Journey in" data-es="Mi Trayectoria en">My Journey in</span> <span data-en="Tech" data-es="Tecnología">Tech</span></h2>
+                <p class="section-subtitle" data-en="Turning ideas into reality through code" data-es="Convirtiendo ideas en realidad a través del código">Turning ideas into reality through code</p>
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>Building Solutions <span>That Matter</span></h3>
-                    <p>
+                    <h3><span data-en="Building Solutions" data-es="Construyendo Soluciones">Building Solutions</span> <span data-en="That Matter" data-es="Que Importan">That Matter</span></h3>
+                    <p data-en="I started this journey because of my love for video games and the desire to create them. While game development captured my heart in 2018-2019, I discovered a deeper passion for software development as a profession, and I've been building solutions ever since." data-es="Comencé este camino por mi amor a los videojuegos y el deseo de crearlos. Aunque el desarrollo de videojuegos capturó mi corazón entre 2018 y 2019, descubrí una pasión más profunda por el desarrollo de software como profesión, y he estado construyendo soluciones desde entonces.">
                         I started this journey because of my love for video games and the desire to create them.
                         While game development captured my heart in 2018-2019, I discovered a deeper passion for
                         software development as a profession, and I've been building solutions ever since.
                     </p>
-                    <p>
+                    <p data-en='I graduated in 2020 with a degree in <span class="highlight">Software Engineering</span> from <span class="highlight">UAPA (Universidad Abierta Para Adultos)</span> in the Dominican Republic, where I built the strong academic foundation that powers my work every day.' data-es='Me gradué en 2020 de <span class="highlight">Ingeniería de Software</span> en la <span class="highlight">UAPA (Universidad Abierta Para Adultos)</span> en República Dominicana, donde construí la sólida base académica que impulsa mi trabajo cada día.'>
+                        I graduated in 2020 with a degree in <span class="highlight">Software Engineering</span> from
+                        <span class="highlight">UAPA (Universidad Abierta Para Adultos)</span> in the Dominican Republic,
+                        where I built the strong academic foundation that powers my work every day.
+                    </p>
+                    <p data-en='My expertise spans across <span class="highlight">web development</span>, <span class="highlight">mobile applications</span>, and <span class="highlight">desktop software</span>. I thrive on challenging and unconventional projects—I&#39;m not interested in typical store apps. I seek complex problems that push my skills forward and deliver real value.' data-es='Mi experiencia abarca <span class="highlight">desarrollo web</span>, <span class="highlight">aplicaciones móviles</span> y <span class="highlight">software de escritorio</span>. Disfruto los proyectos desafiantes y poco convencionales—no me interesan las aplicaciones típicas de tienda. Busco problemas complejos que lleven mis habilidades más lejos y entreguen valor real.'>
                         My expertise spans across <span class="highlight">web development</span>, <span class="highlight">mobile applications</span>,
                         and <span class="highlight">desktop software</span>. I thrive on challenging and unconventional projects—I'm not interested
                         in typical store apps. I seek complex problems that push my skills forward and deliver real value.
                     </p>
-                    <p>
-                        From powerful <span class="highlight">ASP.NET web applications</span> to sleek <span class="highlight">Windows Forms desktop apps</span>
-                        and responsive <span class="highlight">mobile experiences</span>, I bring ideas to life across all platforms.
-                        As an AI enthusiast, I also leverage tools like Claude to write smarter, more efficient code.
+                    <p data-en='From powerful <span class="highlight">ASP.NET web applications</span> to modern <span class="highlight">React</span> and <span class="highlight">Next.js</span> stacks running on <span class="highlight">Node.js</span>, and from sleek <span class="highlight">Windows Forms desktop apps</span> to responsive <span class="highlight">mobile experiences</span>, I bring ideas to life across all platforms. As an AI-forward developer, I&#39;ve adopted <span class="highlight">Claude Code</span> as a core part of my modern workflow, pairing with AI to write smarter, faster, and more reliable software.' data-es='Desde potentes <span class="highlight">aplicaciones web en ASP.NET</span> hasta stacks modernos con <span class="highlight">React</span> y <span class="highlight">Next.js</span> sobre <span class="highlight">Node.js</span>, y desde elegantes <span class="highlight">apps de escritorio en Windows Forms</span> hasta <span class="highlight">experiencias móviles</span> responsivas, doy vida a las ideas en todas las plataformas. Como desarrollador enfocado en IA, he adoptado <span class="highlight">Claude Code</span> como parte central de mi flujo de trabajo moderno, programando junto a la IA para escribir software más inteligente, rápido y confiable.'>
+                        From powerful <span class="highlight">ASP.NET web applications</span> to modern
+                        <span class="highlight">React</span> and <span class="highlight">Next.js</span> stacks running on
+                        <span class="highlight">Node.js</span>, and from sleek <span class="highlight">Windows Forms desktop apps</span>
+                        to responsive <span class="highlight">mobile experiences</span>, I bring ideas to life across all platforms.
+                        As an AI-forward developer, I've adopted <span class="highlight">Claude Code</span> as a core part of my
+                        modern workflow, pairing with AI to write smarter, faster, and more reliable software.
                     </p>
+                    <div class="about-cta">
+                        <a href="cv.html" class="btn btn-primary" target="_blank" rel="noopener">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                            <span data-en="View my CV" data-es="Ver mi CV">View my CV</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="about-stats-wrapper">
                     <div class="about-stats">
                         <div class="stat-item">
                             <div class="stat-number">7+</div>
-                            <div class="stat-label">Years Coding</div>
+                            <div class="stat-label" data-en="Years Coding" data-es="Años Programando">Years Coding</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number">5+</div>
-                            <div class="stat-label">Projects</div>
+                            <div class="stat-label" data-en="Projects" data-es="Proyectos">Projects</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-number">10+</div>
-                            <div class="stat-label">Technologies</div>
+                            <div class="stat-label" data-en="Technologies" data-es="Tecnologías">Technologies</div>
                         </div>
                     </div>
                 </div>
@@ -1199,50 +1250,54 @@
     <section class="skills" id="skills">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Skills</span>
-                <h2 class="section-title">Technical <span>Expertise</span></h2>
-                <p class="section-subtitle">Technologies and tools I work with daily</p>
+                <span class="section-label" data-en="Skills" data-es="Habilidades">Skills</span>
+                <h2 class="section-title"><span data-en="Technical" data-es="Experiencia">Technical</span> <span data-en="Expertise" data-es="Técnica">Expertise</span></h2>
+                <p class="section-subtitle" data-en="Technologies and tools I work with daily" data-es="Tecnologías y herramientas con las que trabajo a diario">Technologies and tools I work with daily</p>
             </div>
             <div class="skills-grid">
                 <div class="skill-card">
                     <div class="skill-icon">&#x1F5A5;</div>
-                    <h3>Backend Development</h3>
+                    <h3 data-en="Backend Development" data-es="Desarrollo Backend">Backend Development</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">C#</span>
                         <span class="skill-tag">.NET Framework</span>
                         <span class="skill-tag">ASP.NET</span>
+                        <span class="skill-tag">Node.js</span>
                         <span class="skill-tag">Python</span>
                         <span class="skill-tag">MySQL</span>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">&#x1F310;</div>
-                    <h3>Frontend Development</h3>
+                    <h3 data-en="Frontend Development" data-es="Desarrollo Frontend">Frontend Development</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Next.js</span>
                         <span class="skill-tag">HTML5</span>
                         <span class="skill-tag">CSS3</span>
                         <span class="skill-tag">JSON</span>
-                        <span class="skill-tag">Responsive Design</span>
+                        <span class="skill-tag" data-en="Responsive Design" data-es="Diseño Responsivo">Responsive Design</span>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">&#x1F4F1;</div>
-                    <h3>Mobile & Desktop</h3>
+                    <h3 data-en="Mobile & Desktop" data-es="Móvil y Escritorio">Mobile & Desktop</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Windows Forms</span>
                         <span class="skill-tag">Xamarin</span>
                         <span class="skill-tag">XAML</span>
-                        <span class="skill-tag">Mobile Web</span>
+                        <span class="skill-tag" data-en="Mobile Web" data-es="Web Móvil">Mobile Web</span>
                     </div>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">&#x1F527;</div>
-                    <h3>Tools & Platforms</h3>
+                    <h3 data-en="Tools & Platforms" data-es="Herramientas y Plataformas">Tools & Platforms</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">Git</span>
                         <span class="skill-tag">GitHub</span>
-                        <span class="skill-tag">AI Integration</span>
+                        <span class="skill-tag">Claude Code</span>
+                        <span class="skill-tag" data-en="AI Integration" data-es="Integración de IA">AI Integration</span>
                         <span class="skill-tag">Claude AI</span>
                     </div>
                 </div>
@@ -1254,9 +1309,9 @@
     <section class="projects" id="projects">
         <div class="container">
             <div class="section-header">
-                <span class="section-label">Portfolio</span>
-                <h2 class="section-title">Featured <span>Projects</span></h2>
-                <p class="section-subtitle">A showcase of my work and passion projects</p>
+                <span class="section-label" data-en="Portfolio" data-es="Portafolio">Portfolio</span>
+                <h2 class="section-title"><span data-en="Featured" data-es="Proyectos">Featured</span> <span data-en="Projects" data-es="Destacados">Projects</span></h2>
+                <p class="section-subtitle" data-en="A showcase of my work and passion projects" data-es="Una muestra de mi trabajo y proyectos apasionantes">A showcase of my work and passion projects</p>
             </div>
             <div class="projects-grid">
                 <!-- MhMusik - Featured -->
@@ -1273,18 +1328,18 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <span class="project-label">Web & Mobile Platform</span>
-                        <h3>MhMusik - Music Distribution Platform</h3>
-                        <p>
+                        <span class="project-label" data-en="Web & Mobile Platform" data-es="Plataforma Web y Móvil">Web & Mobile Platform</span>
+                        <h3 data-en="MhMusik - Music Distribution Platform" data-es="MhMusik - Plataforma de Distribución Musical">MhMusik - Music Distribution Platform</h3>
+                        <p data-en="A comprehensive music distribution platform with both web dashboard and mobile app. Artists can distribute their music to major platforms like Spotify and YouTube Music, track analytics, manage earnings, and handle copyright registrations." data-es="Una plataforma integral de distribución musical con dashboard web y aplicación móvil. Los artistas pueden distribuir su música en plataformas como Spotify y YouTube Music, analizar métricas, gestionar ingresos y manejar registros de derechos de autor.">
                             A comprehensive music distribution platform with both web dashboard and mobile app.
                             Artists can distribute their music to major platforms like Spotify and YouTube Music,
                             track analytics, manage earnings, and handle copyright registrations.
                         </p>
                         <div class="project-tech">
-                            <span>Web App</span>
-                            <span>Mobile App</span>
-                            <span>Analytics</span>
-                            <span>Payment Integration</span>
+                            <span data-en="Web App" data-es="App Web">Web App</span>
+                            <span data-en="Mobile App" data-es="App Móvil">Mobile App</span>
+                            <span data-en="Analytics" data-es="Analítica">Analytics</span>
+                            <span data-en="Payment Integration" data-es="Integración de Pagos">Payment Integration</span>
                         </div>
                     </div>
                 </div>
@@ -1301,9 +1356,9 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <span class="project-label">Educational System</span>
-                        <h3>JCM - Report Card Management</h3>
-                        <p>
+                        <span class="project-label" data-en="Educational System" data-es="Sistema Educativo">Educational System</span>
+                        <h3 data-en="JCM - Report Card Management" data-es="JCM - Gestión de Boletines">JCM - Report Card Management</h3>
+                        <p data-en="Full-featured school management system for handling student grades and reports. Includes portals for teachers and parents with a beautiful dark-themed UI." data-es="Sistema completo de gestión escolar para manejar calificaciones y reportes de estudiantes. Incluye portales para docentes y padres con una elegante interfaz de tema oscuro.">
                             Full-featured school management system for handling student grades and reports.
                             Includes portals for teachers and parents with a beautiful dark-themed UI.
                         </p>
@@ -1311,7 +1366,7 @@
                             <span>ASP.NET</span>
                             <span>C#</span>
                             <span>MySQL</span>
-                            <span>Web Application</span>
+                            <span data-en="Web Application" data-es="Aplicación Web">Web Application</span>
                         </div>
                     </div>
                 </div>
@@ -1325,17 +1380,17 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <span class="project-label">Mobile Applications</span>
+                        <span class="project-label" data-en="Mobile Applications" data-es="Aplicaciones Móviles">Mobile Applications</span>
                         <h3>CashFlow & Kronos Bible</h3>
-                        <p>
+                        <p data-en="<strong>CashFlow:</strong> Personal finance app for managing multiple accounts and tracking expenses. <strong>Kronos Bible:</strong> Daily scripture reading app with audio playback and reading plans." data-es="<strong>CashFlow:</strong> Aplicación de finanzas personales para administrar múltiples cuentas y seguir gastos. <strong>Kronos Bible:</strong> App de lectura diaria de las escrituras con reproducción de audio y planes de lectura.">
                             <strong>CashFlow:</strong> Personal finance app for managing multiple accounts and tracking expenses.
                             <strong>Kronos Bible:</strong> Daily scripture reading app with audio playback and reading plans.
                         </p>
                         <div class="project-tech">
                             <span>Xamarin</span>
                             <span>XAML</span>
-                            <span>Mobile Development</span>
-                            <span>Audio Player</span>
+                            <span data-en="Mobile Development" data-es="Desarrollo Móvil">Mobile Development</span>
+                            <span data-en="Audio Player" data-es="Reproductor de Audio">Audio Player</span>
                         </div>
                     </div>
                 </div>
@@ -1352,16 +1407,16 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <span class="project-label">Game Development</span>
-                        <h3>Arcade Game Project</h3>
-                        <p>
+                        <span class="project-label" data-en="Game Development" data-es="Desarrollo de Videojuegos">Game Development</span>
+                        <h3 data-en="Arcade Game Project" data-es="Proyecto de Videojuego Arcade">Arcade Game Project</h3>
+                        <p data-en="A fun arcade-style game with multiplayer features, high score tracking, and engaging gameplay mechanics. Where my passion for coding began!" data-es="Un divertido videojuego estilo arcade con modo multijugador, sistema de puntajes altos y mecánicas de juego atractivas. ¡Donde comenzó mi pasión por la programación!">
                             A fun arcade-style game with multiplayer features, high score tracking,
                             and engaging gameplay mechanics. Where my passion for coding began!
                         </p>
                         <div class="project-tech">
-                            <span>Game Dev</span>
-                            <span>Multiplayer</span>
-                            <span>Score System</span>
+                            <span data-en="Game Dev" data-es="Desarrollo de Juegos">Game Dev</span>
+                            <span data-en="Multiplayer" data-es="Multijugador">Multiplayer</span>
+                            <span data-en="Score System" data-es="Sistema de Puntaje">Score System</span>
                         </div>
                     </div>
                 </div>
@@ -1373,15 +1428,21 @@
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-card">
-                <h2>Let's Work Together</h2>
-                <p>Have a project in mind? I'd love to hear about it. Let's create something amazing together.</p>
+                <h2 data-en="Let's Work Together" data-es="Trabajemos Juntos">Let's Work Together</h2>
+                <p data-en="Have a project in mind? I'd love to hear about it. Let's create something amazing together." data-es="¿Tienes un proyecto en mente? Me encantaría escucharlo. Creemos algo increíble juntos.">Have a project in mind? I'd love to hear about it. Let's create something amazing together.</p>
                 <div class="contact-links">
                     <a href="mailto:jeffry.m.bonifacio@gmail.com" class="contact-link">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                             <polyline points="22,6 12,13 2,6"/>
                         </svg>
-                        Email Me
+                        <span data-en="Email Me" data-es="Envíame un Correo">Email Me</span>
+                    </a>
+                    <a href="https://wa.me/18099525334" target="_blank" rel="noopener" class="contact-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                        <span data-en="WhatsApp" data-es="WhatsApp">WhatsApp</span>
                     </a>
                     <a href="https://github.com/FrijeyLabs" target="_blank" class="contact-link">
                         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -1397,7 +1458,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 Jeffry Marte Bonifacio. Built with passion and code.</p>
+            <p data-en="© 2026 Jeffry Marte Bonifacio. Built with passion and code." data-es="© 2026 Jeffry Marte Bonifacio. Construido con pasión y código.">&copy; 2026 Jeffry Marte Bonifacio. Built with passion and code.</p>
         </div>
     </footer>
 
@@ -1408,6 +1469,40 @@
     </div>
 
     <script>
+        // Language toggle
+        const LANG_KEY = 'jmb-lang';
+
+        function applyLanguage(lang) {
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const value = el.getAttribute('data-' + lang);
+                if (value == null) return;
+                if (value.indexOf('<') !== -1) {
+                    el.innerHTML = value;
+                } else {
+                    el.textContent = value;
+                }
+            });
+            document.documentElement.lang = lang === 'es' ? 'es' : 'en';
+            const label = document.getElementById('langLabel');
+            if (label) label.textContent = lang === 'es' ? 'EN' : 'ES';
+            try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+        }
+
+        function toggleLanguage() {
+            const current = (localStorage.getItem(LANG_KEY) || 'en');
+            applyLanguage(current === 'en' ? 'es' : 'en');
+        }
+
+        (function initLanguage() {
+            let saved = 'en';
+            try { saved = localStorage.getItem(LANG_KEY) || 'en'; } catch (e) {}
+            if (saved === 'es') applyLanguage('es');
+            else {
+                const label = document.getElementById('langLabel');
+                if (label) label.textContent = 'ES';
+            }
+        })();
+
         // Mobile menu toggle
         function toggleMenu() {
             document.querySelector('.nav-links').classList.toggle('active');
