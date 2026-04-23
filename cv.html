@@ -473,6 +473,8 @@
             <div class="personal-grid">
                 <div><span class="label" data-en="Nationality:" data-es="Nacionalidad:">Nationality:</span> <span data-en="Dominican" data-es="Dominicana">Dominican</span></div>
                 <div><span class="label" data-en="ID (Cédula):" data-es="Cédula:">ID (Cédula):</span> 050-0051489-2</div>
+                <div><span class="label" data-en="Date of Birth:" data-es="Fecha de Nacimiento:">Date of Birth:</span> <span data-en="July 8, 1995" data-es="8 de julio de 1995">July 8, 1995</span> (<span data-en="age" data-es="edad">age</span> <span class="age" data-birth="1995-07-08">—</span>)</div>
+                <div><span class="label" data-en="Marital Status:" data-es="Estado Civil:">Marital Status:</span> <span data-en="Married — wife Marlyn; daughter Miranda" data-es="Casado — esposa Marlyn; hija Miranda">Married — wife Marlyn; daughter Miranda</span></div>
                 <div><span class="label" data-en="Location:" data-es="Ubicación:">Location:</span> <span data-en="Jarabacoa, Dominican Republic" data-es="Jarabacoa, República Dominicana">Jarabacoa, Dominican Republic</span></div>
                 <div><span class="label" data-en="Languages:" data-es="Idiomas:">Languages:</span> <span data-en="Spanish (native), English (professional)" data-es="Español (nativo), Inglés (profesional)">Spanish (native), English (professional)</span></div>
                 <div><span class="label" data-en="Availability:" data-es="Disponibilidad:">Availability:</span> <span data-en="Immediate" data-es="Inmediata">Immediate</span></div>
@@ -603,6 +605,20 @@
                 if (label) label.textContent = 'ES';
             }
         })();
+
+        // Dynamic age — stays accurate over time
+        function computeAge(birthISO) {
+            const b = new Date(birthISO);
+            const now = new Date();
+            let age = now.getFullYear() - b.getFullYear();
+            const m = now.getMonth() - b.getMonth();
+            if (m < 0 || (m === 0 && now.getDate() < b.getDate())) age--;
+            return age;
+        }
+
+        document.querySelectorAll('[data-birth]').forEach(el => {
+            el.textContent = computeAge(el.getAttribute('data-birth'));
+        });
 
         function downloadPDF() {
             const element = document.getElementById('cvPaper');
